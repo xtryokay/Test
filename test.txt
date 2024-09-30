@@ -1,0 +1,74 @@
+from sklearn.metrics import confusion_matrix, classification_report, precision_score, recall_score, f1_score
+
+#Confusion Matrix
+conf_matrix = confusion_matrix (Y_test, y_pred_test)
+print('Confusion Matrix:')
+print(conf_matrix)
+
+
+Confusion Matrix:
+[[88294     0     5     0     1     0     0]
+ [ 3458     4     0     0     0     0     0]
+ [ 1294     0    16     0     0     0     0]
+ [  265     0     0     0     0     0     0]
+ [   71     0     0     0     5     0     0]
+ [   36     0     2     0     0     0     0]
+ [  147     0     0     0     0     0     0]]
+
+# Metriken (Precision, Recall, f1_Score)
+# precision = precision_score(Y_test, y_pred_test)
+# recall = recall_score(Y_test, y_pred_test)
+# f1 = f1_score(Y_test, y_pred_test)
+
+#Classification Report mit Precision, Recall, F1-Score
+class_report = classification_report(Y_test, y_pred_test)
+print('Classification Report:')
+print(class_report)
+
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      1.00      0.97     88300
+           1       1.00      0.00      0.00      3462
+           2       0.70      0.01      0.02      1310
+           3       0.00      0.00      0.00       265
+           4       0.83      0.07      0.12        76
+           5       0.00      0.00      0.00        38
+           6       0.00      0.00      0.00       147
+
+    accuracy                           0.94     93598
+   macro avg       0.50      0.15      0.16     93598
+weighted avg       0.94      0.94      0.92     93598
+
+/databricks/python/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1327: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/databricks/python/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1327: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/databricks/python/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1327: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+
+
+ValueError: Target is multiclass but average='binary'. Please choose another average setting, one of [None, 'micro', 'macro', 'weighted'].
+File <command-2783550290690812>, line 2
+      1 # Metriken (Precision, Recall, f1_Score)
+----> 2 precision = precision_score(Y_test, y_pred_test)
+      3 recall = recall_score(Y_test, y_pred_test)
+      4 f1 = f1_score(Y_test, y_pred_test)
+File /databricks/python/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1374, in _check_set_wise_labels(y_true, y_pred, average, labels, pos_label)
+   1372         if y_type == "multiclass":
+   1373             average_options.remove("samples")
+-> 1374         raise ValueError(
+   1375             "Target is %s but average='binary'. Please "
+   1376             "choose another average setting, one of %r." % (y_type, average_options)
+   1377         )
+   1378 elif pos_label not in (None, 1):
+   1379     warnings.warn(
+   1380         "Note that pos_label (set to %r) is ignored when "
+   1381         "average != 'binary' (got %r). You may use "
+   (...)
+   1384         UserWarning,
+   1385     )
+
+
+
